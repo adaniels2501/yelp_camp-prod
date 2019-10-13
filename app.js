@@ -80,7 +80,11 @@ app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
 
 
-const PORT = process.env.PORT || 3000;
-app.listen(3000, () => {
-	console.log('YelpCamp listening on port 3000');
+// const PORT = process.env.PORT || 3000;
+// app.listen(3000, () => {
+// 	console.log('YelpCamp listening on port 3000');
+// });
+
+app.listen(process.env.PORT || 3000 ,function(){
+    console.log("up and running on port "+process.env.PORT);
 });
