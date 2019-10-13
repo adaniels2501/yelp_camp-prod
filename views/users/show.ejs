@@ -1,0 +1,40 @@
+<% include ../partials/header %> 
+
+<div class="row">
+	<div class="col-md-4 authorBio">
+		<h1 class="authorNames"><%= user.firstName + " " + user.lastName %></h1>
+		<div class="thumbnail">
+			<img src="<%= user.avatar %>" alt="user profile image">
+			<div class="caption"><a href="mailto:<%= user.email %>"><%= user.email %></a></div>
+			<div class="caption"><a href="/follow/<%= user.id %>"><button class="btn btn-primary text-capitalize"><i class="fas fa-bookmark"></i>Follow <%= user.username %></button></a></div>
+		</div>
+		<strong><p style="
+    text-transform: capitalize;"><%= user.username %>'s Bio</p></strong>
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus repudiandae cum quaerat, deserunt ex, error illum ullam corporis numquam assumenda officiis praesentium veritatis dignissimos sint. Repudiandae reprehenderit numquam error nihil.
+		
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque debitis accusamus libero veritatis impedit, eaque fugit ipsa delectus sequi harum quia numquam nemo dolorum sit, aliquam error, vel aperiam? Et.
+	</div>
+	
+	<div class="col-md-8 campsList">
+		<h3 class="campsHeader"><%= user.username %>'s Posted Campgrounds: </h3>
+		<ul class="profileCampgrounds">
+			<% campgrounds.forEach(function(campground) { %>
+				<li>
+					<div class="campsContainer">
+						<div>
+							<a href="/campgrounds/<%= campground.id %>">
+								<img src="<%= campground.image %>" alt="campground" class="img-thumbnail tinyImg">
+							</a>
+						</div>
+						<div class="campsDetails">
+							<a class="campNames" href="/campgrounds/<%= campground.id %>"><%= campground.name %></a>
+							<p class="text-limit"><%= campground.description %></p>
+						</div>	
+					</div>
+				</li>
+			<% }) %>
+		</ul>
+	</div>
+</div>
+
+<% include ../partials/footer %> 

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<!-- Make site responsive on mobile/tablet -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>YelpCamp</title>
+		<script src="https://kit.fontawesome.com/965d8dae00.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/stylesheets/main.css">
+    </head>
+    <body>
+    <nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            <a class="navbar-brand" href="/">YelpCamp</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="<%= typeof page !== 'undefined' && page === 'campgrounds' ? 'active' : '' %>"><a href="/campgrounds">Home</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+				<li style="top: 8px;">
+					<form action="/campgrounds" class="form-inline my-2 my-lg-0" method="GET">
+						<input class="form-control mr-sm-2" type="text" name="search" placeholder="Campground search..." aria-label="Search">
+						<input class="btn btn-default my-2 my-sm-0" type="submit" value="search">
+					</form> 
+				</li>
+			  	<li><a href="/campgrounds/new"><i class="fas fa-map-marked-alt"></i>Add New</a></li>
+              <% if(!currentUser){ %>
+                  <li class="<%= typeof page !== 'undefined' && page === 'login' ? 'active' : '' %>"><a href="/login"><i class="fas fa-sign-in-alt"></i>Login</a></li>
+                  <li class="<%= typeof page !== 'undefined' && page === 'register' ? 'active' : '' %>"><a href="/register"><i class="fas fa-user-plus"></i>Register</a></li>
+              <% } else { %>
+                    <li><a class="text-capitalize" href="/users/<%= currentUser.id %>">Signed In As: <%= currentUser.username %></a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" 
+						   data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Notifications 
+							<span class="badge"><%= notifications.length %></span></a>
+					<ul class="dropdown-menu">
+						<li>
+							<a class="pastNotification" href="/notifications">View past notifications</a>
+						</li>
+						<% notifications.forEach(function(notification) { %>                          
+						<li class="newNotificationList">
+							<a href="/notifications/<%= notification.id %>">
+							<i class="fab fa-the-red-yeti"></i><%= notification.username %> created a new campground
+							</a>
+						</li>
+						<% }); %>
+					</ul>
+					</li>	
+                  <li><a href="/logout"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
+              <% } %>
+          </ul>
+        </div>
+    </div>
+</nav>
+    
+    <div class="container">
+        
+        <% if(error && error.length > 0){ %>
+            <div class="alert alert-danger" role="alert">
+                <%= error %>
+            </div>
+        <% } %>
+        <% if(success && success.length > 0){ %>
+            <div class="alert alert-success" role="alert">
+                <%= success %>
+            </div>
+        <% } %>
+    </div>
+	
+	<div class="container">	
+		
+    
