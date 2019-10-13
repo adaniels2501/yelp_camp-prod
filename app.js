@@ -13,14 +13,28 @@ const express    		= require('express'),
 	  //referencing and importing the model and schema from campground.js in models
 	  Comment	 		= require('./models/comment'),
   	  seedDB	 		= require('./seeds'),
-	  User		 		= require('./models/user')
+	  User		 		= require('./models/user'),
+	  url 				= process.env.MONGOLAB_URI,
+	  adminCode			= process.env.ADMIN_SEKRET
 
 	//REQUIRING ROUTES
 const commentRoutes 	= require('./routes/comments'),
 	  campgroundRoutes	= require('./routes/campgrounds'),
 	  indexRoutes		= require('./routes/index')
-    
-mongoose.connect('mongodb://localhost:27017/yelp_camp_final', {useNewUrlParser: true, useUnifiedTopology: true});
+
+
+mongoose.connect(url, {
+	useNewUrlParser: true,
+	useCreateIndex: true,
+	useUnifiedTopology: true
+}).then(() => {
+	console.log('Connected to DB!');
+}).catch(err => {
+	console.log('ERROR', err.message);
+});
+
+// mongoose.connect('mongodb://localhost:27017/yelp_camp_final', {useNewUrlParser: true, useUnifiedTopology: true});
+
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 app.use(bodyParser.urlencoded({extended: true}));

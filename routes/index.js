@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express 	    = require("express"),
 	  router  		= express.Router(),
 	  passport 		= require("passport"),
@@ -7,8 +9,8 @@ const express 	    = require("express"),
 	  crypto		= require('crypto'),
 	  middleware	= require('../middleware'),
 	  Notification 	= require('../models/notification'),
-	  async			= require('async')
-
+	  async			= require('async'),
+	  adminCode		= process.env.ADMIN_SEKRET
 
 //ROOT ROUTE
 router.get("/", function(req, res){

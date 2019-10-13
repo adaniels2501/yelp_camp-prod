@@ -5,7 +5,6 @@ const express 		= require("express"),
 	  multer		= require("multer"),
 	  Notification  = require("../models/notification"),
 	  User			= require("../models/user")
-	
 
 //MULTER CONFIGURATION
 var storage = multer.diskStorage({
