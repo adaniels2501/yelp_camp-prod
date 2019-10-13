@@ -25,8 +25,7 @@ const commentRoutes 	= require('./routes/comments'),
 
 mongoose.connect(url, {
 	useNewUrlParser: true,
-	useCreateIndex: true,
-	useUnifiedTopology: true
+	useCreateIndex: true
 }).then(() => {
 	console.log('Connected to DB!');
 }).catch(err => {
